@@ -1,0 +1,21 @@
+@use '../../../global.scss' as *;
+
+.programacion-musical-title{ 
+    display: flex;
+    margin: 45px 150px 0 150px;
+    .fa-circle-left {
+        color: $sun-yellow;
+        font-size: 60px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    h1 {
+        font-size: 55px;
+        width: 100vw;
+        text-align: center;
+        color: $cosmic-violet;
+    }
+}

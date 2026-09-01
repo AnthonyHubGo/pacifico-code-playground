@@ -1,0 +1,43 @@
+@use '../../../global.scss' as *;
+
+.programacion-musical-level-button {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: none;
+    font-family: $font-poppins;
+    font-size: 90px;
+    color: $star-white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+
+    &.color-galactic-blue { background-color: $galactic-blue; }
+    &.color-cosmic-violet { background-color: $cosmic-violet; }
+    &.color-sun-yellow { background-color: $sun-yellow; }
+    &.color-brilliant-turquoise { background-color: $brilliant-turquoise; }
+
+    .level-number {
+        z-index: 1;
+    }
+
+    .fa-lock {
+        position: absolute;
+        font-size: 50px;
+        color: $space-gray;
+        z-index: 2;
+    }
+
+    &:hover {
+        cursor: pointer;
+        font-size: 100px;
+    }
+
+    &:disabled {
+        cursor: not-allowed; // 🔒 no pointer
+        opacity: 0.8;
+        font-size: 90px;
+    }
+}

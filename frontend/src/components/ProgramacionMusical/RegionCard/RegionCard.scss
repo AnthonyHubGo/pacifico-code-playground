@@ -1,0 +1,54 @@
+@use '../../../global.scss' as *;
+
+.region-card {
+    background-color: $space-gray;
+    width: 700px;
+    height: 150px;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+
+    img {
+        height: 95%;
+    }
+
+    .region-card-text {
+        width: 75%;
+        height: 90%;
+
+        h2 {
+            color: $brilliant-turquoise;
+            margin: 0;
+        }
+
+        p {
+            font-family: $font-poppins;
+            color: $star-white;
+            margin-top: 5px;
+            font-size: 15px;
+        }
+    }
+
+    .lock-icon {
+        color: $brilliant-turquoise;
+        font-size: 2rem;
+        pointer-events: none;
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: transform 0.3s;
+        box-shadow: 0 4px 8px $brilliant-turquoise;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+        transform: none;
+        box-shadow: none;
+    }
+}

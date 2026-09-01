@@ -1,0 +1,35 @@
+@use '../../../global.scss' as *;
+
+.programacion-musical-regions-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+
+    .regions-page-title {
+        width: 80vw;
+        display: flex;
+        justify-content: center;
+
+        .fa-circle-left {
+            color: $sun-yellow;
+            font-size: 60px;
+            margin-right: auto;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        
+        div {
+            width: 100%;
+        }
+
+        h1{
+            color: $cosmic-violet;
+            text-align: center;
+        }
+        
+    }
+}

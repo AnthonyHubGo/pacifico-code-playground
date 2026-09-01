@@ -1,0 +1,240 @@
+@use "sass:color";
+@use "../../global.scss" as *;
+.music-module {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: $space-gray;
+  font-family: $font-poppins;
+  overflow: hidden;   /* evita que la página genere un espacio extra abajo */
+
+  .demo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $cosmic-violet;
+    padding: 10px 16px;
+    gap: 8px;
+    min-height: 52px;
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $cosmic-violet;
+    }
+
+    div {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .function-btn {
+      background: $brilliant-turquoise;
+      color: $space-gray;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;  
+      font-family: $font-poppins;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.95rem;
+
+      &:hover {
+        background: color.adjust($brilliant-turquoise, $lightness: -10%);
+      }
+    }
+  }
+
+  .workspace-layout {
+    flex: 1;   
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    /* IMPORTANTE: permitir que Blockly coloque controles fuera del SVG */
+    overflow: hidden;        /* ocultamos overflow general para evitar scrollbar de página */
+    background: $space-gray;
+    min-height: 0;           /* clave para que flex hijos con height:100% funcionen */
+    min-width: 0;
+    position: relative;
+
+    .blockly-workspace {
+      /* ocupa el 65% a la izquierda por defecto (puedes ajustar si quieres) */
+      flex: 1 1 65%;
+      width: 65%;
+      height: 100%;
+      min-height: 0;
+      min-width: 0;
+      position: relative;
+      overflow: visible; 
+
+      /* Asegurar que el svg interno de Blockly llene el contenedor */
+      .blocklySvg,
+      & > svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block;
+      }
+    }
+
+    /* panel derecho ocupa el resto */
+    .right-panel {
+      flex: 0 0 35%;
+      background-color: $space-gray;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 35%;
+      height: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      margin-left: 16px;
+      color: $space-gray;
+      box-sizing: border-box;
+      overflow-y: auto;      /* scroll interno si hace falta */
+
+      h2 {
+        margin-top: 8px;
+      }
+
+      p {
+        margin-top: 8px;
+        width: 100%;
+      }
+
+      .programacion-musical-instructions-card {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Usar % relativo a panel derecho, evita exceder la altura total */
+        height: auto;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e8e8e8;
+        padding: 20px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+
+        .instructions-card-img {
+          img {
+            width: 96px;
+            height: 96px;
+            object-fit: contain;
+          }
+        }
+
+        .instructions-card-text {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          width: 100%;
+
+          h3 {
+            text-align: center;
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+          }
+
+          p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #4b5563;
+            text-align: left;
+          }
+        }
+      }
+
+      .programacion-musical-levels-panel {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        box-sizing: border-box;
+
+        .level-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          background: #fff;
+          border: 1px solid #e6e6e6;
+          border-radius: 12px;
+          padding: 12px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+          width: calc(50% - 6px);
+          box-sizing: border-box;
+
+          &:hover {
+            transform: translateY(-3px);
+            border-color: #5CA65C;
+            cursor: pointer;
+          }
+
+          .level-icon {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+          }
+        }
+
+        .level-btn.active {
+          border-color: #36E0D1;
+          background: #f0fdfa;
+        }
+
+        .level-btn.locked {
+          opacity: 0.7; 
+          cursor: not-allowed;
+          position: relative;
+
+          &::after {
+            content: "🔒";  
+            font-size: 1.2rem;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: #555;   
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Forzar visibilidad/z-index de controles de Blockly si algún CSS global los tapa */
+.blocklyTrash,
+.blocklyZoom,
+.blocklyScrollbar,
+.blocklyToolboxDiv,
+.blocklyFlyout {
+  z-index: 60 !important;
+  pointer-events: auto !important;
+}
+
+/* botones zoom (por si están ocultos por alguna regla global) */
+.blocklyZoomButton {
+  display: block !important;
+}
+
+/* Ajustes responsive mínimos */
+@media (max-width: 1024px) {
+  .music-module .workspace-layout {
+    padding: 8px;
+    .blockly-workspace { width: 100%; flex: 1 1 100%; }
+    .right-panel { display: none; } /* ocultar panel derecho en pantallas pequeñas */
+  }
+
+  .demo-header {
+    padding: 8px 12px;
+    h1 { font-size: 1.4rem; }
+    .function-btn { padding: 6px 10px; font-size: 0.9rem; }
+  }
+}
